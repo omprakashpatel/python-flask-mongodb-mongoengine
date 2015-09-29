@@ -4,13 +4,15 @@ from application.app import app
 # url scheams
 @app.route("/")
 def index():
-	return '''<h1><center>Hello World </center></h1>
-			<h3><center> welcome to my first web app </center></h3>'''
+	return render_template('index.html')
 
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-	return "<h2> Login Page </h2>"
+	if request.method == "GET":
+		return "<h2> Login Page </h2>"
+	elif request.method == "POST":
+		return ""
 
 
 # run server

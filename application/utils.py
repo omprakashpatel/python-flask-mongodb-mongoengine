@@ -53,6 +53,17 @@ def check_req_param(req):
         return decorated_function
     return init_dec
 
+def fix_param(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        print "fix_param"
+        print kwargs
+        for key, value in kwargs.iteritems():
+            if kwargs.get(key) and isinstance(value, list) and len(value) == 1:
+                kwargs[key] = value[0]
+        return f(*args, **kwargs)
+    return decorated_function
+
 def format_data_type(list_var=[], int_var=[], non_list_var=[]):
     def init_format(f):
         @wraps(f)
